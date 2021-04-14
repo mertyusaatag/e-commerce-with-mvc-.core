@@ -1,0 +1,102 @@
+﻿@model OrderModel
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Checkout</h1>
+
+<div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+        <form action="/checkout" method="post">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your cart</span>
+                <span class="badge badge-secondary badge-pill">@Model.CartModel.CartItems.Count()</span>
+            </h4>
+            <ul class="list-group mb-3">
+                @foreach (var item in Model.CartModel.CartItems)
+                {
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div>
+                            <h6 class="my-0">@item.Name</h6>
+                            <span>x @item.Quantity Adet</span>
+
+                        </div>
+                        <span class="text-muted">@item.Price TL</span>
+                    </li>
+                }
+
+                <li class="list-group-item d-flex justify-content-between">
+                    <span>Total (TL)</span>
+                    <strong>@Model.CartModel.Totalprice() TL</strong>
+                </li>
+            </ul>
+
+        </form>
+</div>
+    <div class="col-md-8 order-md-1">
+        <h4 class="mb-3">Billing address</h4>
+        <form action="/checkout" method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.FirstName">First Name</label>
+                    <input asp-for="@Model.FirstName" value="" class="form-control" />
+
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.LastName">Last Name</label>
+                    <input asp-for="@Model.LastName" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Address">Address</label>
+                <textarea asp-for="@Model.Address" class="form-control"></textarea>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.City">City</label>
+                <input asp-for="@Model.City" value="" class="form-control" />
+            </div>
+
+
+            <div class="mb-3">
+                <label asp-for="@Model.Phone">Phone Number</label>
+                <input asp-for="@Model.Phone" value="" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Email">Email</label>
+                <input asp-for="@Model.Email" value="" class="form-control" />
+            </div>
+
+            <h4 class="mb-3">Payment</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.CardName">Name on Credit Card</label>
+                    <input asp-for="@Model.CardName" value="" class="form-control" />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="@Model.CardNumber">Credi Card Number</label>
+                    <input asp-for="@Model.CardNumber" value="" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <label asp-for="@Model.ExpirationMonth">Month</label>
+                    <input asp-for="@Model.ExpirationMonth" value="" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="@Model.ExpirationYear">Year</label>
+                    <input asp-for="@Model.ExpirationYear" value="" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label>CVV</label>
+                    <input asp-for="@Model.Cvv" value="" class="form-control" />
+                </div>
+            </div>
+            <hr class="mb-4">
+            <button asp-action="Checkout" asp-controller="Cart" class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+        </form>
+</div>
+</div>
+
+

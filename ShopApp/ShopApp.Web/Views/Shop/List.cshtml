@@ -1,0 +1,22 @@
+﻿@model ProductListModel
+
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            @await Component.InvokeAsync("CategoryList")
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="row">
+            @foreach (var product in Model.Products)
+            {
+                <partial name="_product" for="@product" />
+
+            }
+        </div>
+        <div page-model="@Model.PageInfo"></div>
+    </div>
+</div>
+
+

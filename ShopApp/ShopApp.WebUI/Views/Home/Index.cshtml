@@ -1,0 +1,23 @@
+﻿@model ShopApp.WebUI.Models.ProductListModel
+
+
+<div class="row">
+    <div class="col-md-3">
+        <ul class="list-group">
+            <li class="list-group">Telefon</li>
+            <li class="list-group">Bilgisayar</li>
+            <li class="list-group">Elektronk</li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <partial name="_slider" />
+        @foreach (var item in Model.Products)
+        {
+            <p>@item.Name</p>
+
+        }
+    </div>
+</div>
+
+
+
